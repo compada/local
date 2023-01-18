@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Get the compose files from the environment variables
-
 declare -a service_dirs=()
 
 # Read the .env file
@@ -13,7 +11,7 @@ while read line; do
     cd ${line#*=}
 
     if [ -f "compose.yaml" ] || [ -f "compose.yml" ] || [ -f "docker-compose.yaml" ] || [ -f "docker-compose.yml" ]; then
-        # Start the compose file in detached mode
+        # Pass all arguments to compose
         docker compose "$@"
     else
         echo " ⠿ No compose file exists within $PWD."
